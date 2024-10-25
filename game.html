@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Soccer Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        #field {
+            width: 600px;
+            height: 400px;
+            background-color: #4CAF50;
+            position: relative;
+            margin: 0 auto;
+            border: 5px solid #ffffff;
+            overflow: hidden;
+        }
+        .player {
+            font-size: 50px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+        .goal {
+            font-size: 100px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: gold;
+            opacity: 0;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Colorful Soccer Game</h1>
+    <div id="field">
+        <div class="player" id="player">⚽</div>
+        <div class="goal" id="goal">🏆</div>
+    </div>
+    <button onclick="takeShot()">Take a Shot!</button>
+    <div id="result"></div>
+
+    <script>
+        function takeShot() {
+            const goal = document.getElementById('goal');
+            const resultText = document.getElementById('result');
+            const player = document.getElementById('player');
+
+            // Randomly determine if it's a goal or a miss
+            const goalChance = Math.random();
+            resultText.innerText = goalChance < 0.5 ? "Goal! 🎉" : "Miss! 😢";
+
+            // Animate the player
+            player.style.transform = 'translateX(-50%) translateY(-50px)';
+            setTimeout(() => {
+                player.style.transform = 'translateX(-50%)';
+            }, 300);
+
+            // Show the trophy if the shot is a goal
+            if (goalChance < 0.5) {
+                goal.style.opacity = 1;
+                setTimeout(() => {
+                    goal.style.opacity = 0;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
